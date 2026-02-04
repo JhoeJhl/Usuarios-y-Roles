@@ -27,10 +27,10 @@ Route::get('/prueba', function () {
     // foreach (DB::table('users')->lazyById() as $user) {
     //     echo $user->name . '<br>';
     // }
-    $users = DB::table('users')->selectRaw('AVG(id) as promedio_id, MAX(id) as max_id, MIN(id) as min_id')->first(); 
-    foreach($users as $user){
-        echo $user . '<br>';
-    }
+    // $users = DB::table('users')->selectRaw('AVG(id) as promedio_id, MAX(id) as max_id, MIN(id) as min_id')->first(); 
+    // foreach($users as $user){
+    //     echo $user . '<br>';
+    // }
 
     // return DB::table('profiles')
     //         ->select('id', 'phone as Numero_Celular', 'created_at')
@@ -42,4 +42,21 @@ Route::get('/prueba', function () {
     //     ->join('profiles', 'users.id', '=', 'profiles.user_id')
     //     ->select('users.id', 'profiles.phone')  
     //     ->get();
+
+    //INSERTAR REGISTROS
+
+    DB::table('users')->insertOrIgnore(
+        [
+            'name' => 'Fulanito Pepe',
+            'email' => 'pepe@fulanito.com',
+            'password' => bcrypt('12345678'),
+            'role' => 'admin',
+            'active' => random_int(0,1),
+            'created_at' => now(),
+            'updated_at' => now()
+
+        ]
+    );
+
+    return "Usuario Creado Correctamente";
 });
